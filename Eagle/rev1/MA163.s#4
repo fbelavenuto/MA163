@@ -9661,7 +9661,6 @@ DIN A4, landscape with extra doc field</description>
 <text x="165.1" y="25.4" size="6.4516" layer="97">Microdigital MA163</text>
 <text x="258.064" y="5.842" size="6.4516" layer="97">1</text>
 <text x="83.82" y="167.64" size="6.4516" layer="97">APPLE 2 BUS / ROM FW</text>
-<text x="38.862" y="78.994" size="1.27" layer="97">MODE key status</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0" smashed="yes"/>
@@ -10321,10 +10320,6 @@ DIN A4, landscape with extra doc field</description>
 <text x="165.1" y="25.4" size="6.4516" layer="97">Microdigital MA163</text>
 <text x="259.08" y="6.35" size="6.4516" layer="97">1</text>
 <text x="99.06" y="167.64" size="6.4516" layer="97">Z80 / ROM / RAM</text>
-<text x="205.74" y="55.88" size="1.778" layer="97">!RAS = A0..7
-!CAS = A1..6
-8000=&gt; A14=0
-C000=&gt; A14=1</text>
 </plain>
 <instances>
 <instance part="FRAME2" gate="G$1" x="0" y="0" smashed="yes"/>
@@ -10373,9 +10368,9 @@ C000=&gt; A14=1</text>
 <attribute name="NAME" x="139.7" y="109.855" size="1.778" layer="95"/>
 <attribute name="VALUE" x="139.7" y="76.2" size="1.778" layer="96"/>
 </instance>
-<instance part="R1" gate="G$1" x="106.68" y="83.82" smashed="yes">
-<attribute name="NAME" x="102.87" y="85.3186" size="1.778" layer="95"/>
-<attribute name="VALUE" x="102.87" y="80.518" size="1.778" layer="96"/>
+<instance part="R1" gate="G$1" x="111.76" y="83.82" smashed="yes">
+<attribute name="NAME" x="107.95" y="85.3186" size="1.778" layer="95"/>
+<attribute name="VALUE" x="107.95" y="80.518" size="1.778" layer="96"/>
 </instance>
 <instance part="GND8" gate="1" x="132.08" y="114.3" smashed="yes">
 <attribute name="VALUE" x="129.54" y="111.76" size="1.778" layer="96"/>
@@ -10855,8 +10850,8 @@ C000=&gt; A14=1</text>
 </segment>
 <segment>
 <pinref part="R1" gate="G$1" pin="1"/>
-<wire x1="99.06" y1="83.82" x2="101.6" y2="83.82" width="0.1524" layer="91"/>
-<label x="99.06" y="83.82" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="104.14" y1="83.82" x2="106.68" y2="83.82" width="0.1524" layer="91"/>
+<label x="104.14" y="83.82" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="IC13" gate="G$1" pin="/RAS"/>
@@ -11114,7 +11109,18 @@ C000=&gt; A14=1</text>
 <label x="228.6" y="88.9" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="FF_HIGH32K" class="0">
+<net name="N$7" class="0">
+<segment>
+<pinref part="IC9" gate="A" pin="!A!/B"/>
+<wire x1="134.62" y1="121.92" x2="116.84" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="116.84" y1="121.92" x2="116.84" y2="83.82" width="0.1524" layer="91"/>
+<pinref part="IC10" gate="A" pin="!A!/B"/>
+<pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="116.84" y1="83.82" x2="134.62" y2="83.82" width="0.1524" layer="91"/>
+<junction x="116.84" y="83.82"/>
+</segment>
+</net>
+<net name="FF_A11" class="0">
 <segment>
 <pinref part="IC10" gate="A" pin="1A"/>
 <wire x1="132.08" y1="106.68" x2="134.62" y2="106.68" width="0.1524" layer="91"/>
@@ -11138,18 +11144,6 @@ C000=&gt; A14=1</text>
 <label x="139.7" y="53.34" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="N$4" class="0">
-<segment>
-<pinref part="IC9" gate="A" pin="!A!/B"/>
-<wire x1="134.62" y1="121.92" x2="114.3" y2="121.92" width="0.1524" layer="91"/>
-<pinref part="IC10" gate="A" pin="!A!/B"/>
-<pinref part="R1" gate="G$1" pin="2"/>
-<wire x1="111.76" y1="83.82" x2="114.3" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="114.3" y1="83.82" x2="134.62" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="114.3" y1="121.92" x2="114.3" y2="83.82" width="0.1524" layer="91"/>
-<junction x="114.3" y="83.82"/>
-</segment>
-</net>
 </nets>
 </sheet>
 <sheet>
@@ -11161,7 +11155,7 @@ C000=&gt; A14=1</text>
 <text x="48.26" y="129.794" size="1.27" layer="98">6000-6FFF</text>
 <text x="48.26" y="124.714" size="1.27" layer="98">7000-7FFF</text>
 <text x="101.6" y="167.64" size="6.4516" layer="97">GLUE LOGIC</text>
-<text x="165.1" y="55.88" size="1.27" layer="97">FLAG_FW=1:
+<text x="165.1" y="55.88" size="1.27" layer="97">pino 2=1:
 A7=0 sai 1
 se A6=0 sai 1
 se A6=1 sai 0
@@ -11169,13 +11163,11 @@ A7=1 sai 0
 se A6=0 sai 1
 se A6=1 sai 1
 
-FLAG_FW=0:
+pino 2=0:
 A7 tanto faz, sai 1:
 se A6=0 sai 1
 se A6=1 sai 0
 </text>
-<text x="109.22" y="93.98" size="1.27" layer="97">0 = No data sended by FW
-1 = Has data sended by FW</text>
 </plain>
 <instances>
 <instance part="FRAME4" gate="G$1" x="0" y="0" smashed="yes"/>
@@ -11680,7 +11672,7 @@ se A6=1 sai 0
 <junction x="33.02" y="10.16"/>
 </segment>
 </net>
-<net name="FF_HIGH32K" class="0">
+<net name="FF_A11" class="0">
 <segment>
 <pinref part="IC6" gate="A" pin="Q"/>
 <wire x1="152.4" y1="142.24" x2="149.86" y2="142.24" width="0.1524" layer="91"/>

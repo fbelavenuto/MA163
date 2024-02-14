@@ -10321,10 +10321,6 @@ DIN A4, landscape with extra doc field</description>
 <text x="165.1" y="25.4" size="6.4516" layer="97">Microdigital MA163</text>
 <text x="259.08" y="6.35" size="6.4516" layer="97">1</text>
 <text x="99.06" y="167.64" size="6.4516" layer="97">Z80 / ROM / RAM</text>
-<text x="205.74" y="55.88" size="1.778" layer="97">!RAS = A0..7
-!CAS = A1..6
-8000=&gt; A14=0
-C000=&gt; A14=1</text>
 </plain>
 <instances>
 <instance part="FRAME2" gate="G$1" x="0" y="0" smashed="yes"/>
