@@ -1,0 +1,210 @@
+
+	.setcpu	"6502"
+
+MON_CH		:= $24
+MON_COUT1	:= $FDF0
+
+; -------------------------------------------------------------
+; Acessing $Cx00 the ROM is mapped to $Cx40
+
+	.org	$C140
+
+Cx40:
+	AND	#$80
+	ORA	#$20
+Cx44:
+	BIT	$FF58		; Clear N and set V
+	BEQ	Cx88
+	INC	$738,X
+	BVS	Cx88
+	.byte	$FF		; Opcode: BBS zp
+;	BBS	$98
+;	bypass next opcode
+Cx4F:
+	TYA
+	AND	#$7F
+	CMP	#13		; CR
+	BEQ	Cx71
+Cx56:
+	CMP	#' '
+	BCC	Cx7C
+	EOR	#$30		; invert bits 5 and 4
+	CMP	#$0A
+	BCC	CxB8
+Cx60:
+	EOR	#$7E		; invert bits from 6 to 1
+	BEQ	Cx85
+	CMP	#07
+	BEQ	Cx71
+	CMP	#$0E
+	BNE	Cx78
+	LDA	#$89
+	STA	$638,X
+Cx71:
+	LDA	#$80
+Cx73:
+	STA	$6B8,X
+	BCS	CxF4
+Cx78:
+	CMP	#$14
+	BNE	Cx80
+Cx7C:
+	TYA
+	STA	$638,X
+
+; -------------------------------------------------------------
+; Acessing $Cx40 the ROM is mapped to $Cx00
+
+	.org	$C100
+Cx00:
+	CLC
+	.byte	$B0		; Opcode BCS, bypass next opcode
+Cx02:
+	SEC
+	PHA
+	TXA
+	PHA
+	TYA
+	PHA
+	PHP
+	SEI
+	JSR	$FF58
+	TSX
+	PLA
+	PLA
+	PLA
+	PLA
+	TAY
+	DEX
+	TXS
+	PLA
+	TAX
+	PLP
+	TYA
+	PHA
+	BCS	Cx31		; Entrypoint by Cx02, jump
+	LDA	#$89
+	STA	$638,X
+	LDA	#$80
+	STA	$6B8,X
+	LDA	#$28
+	STA	$4B8,X
+	LDA	#<Cx02
+	STA	$36
+	STX	$37
+Cx31:
+	TXA
+	ASL	A
+	ASL	A
+	ASL	A
+	ASL	A
+	TAY
+Cx37:
+	LDA	$738,X
+	CMP	MON_CH
+	PLA
+	BCS	Cx44
+	PHA
+
+; -------------------------------------------------------------
+; Acessing $Cx80 the ROM is mapped to $CxC0
+
+	.org	$C1C0
+
+	BEQ	CxC2		; Why?
+CxC2:
+	STA	$4B8,X
+CxC4:
+	STA	$538,X
+	BVC	CxF5
+CxCA:
+	CMP	MON_CH
+CxCC:
+	LDY	$C070
+; CxCD:
+;	BVS	Cx60
+;	BBR	$B0
+;	NOP	$00
+; bypass next 3 opcodes
+	BCC	CxF0
+	BCS	CxF5
+	BRK
+CxD4:
+	BVS	Cx96
+CxD6:
+	STA	MON_CH
+	STA	$738,X
+CxDA:
+	LDA	$6B8,X
+	ASL	A
+	LDA	#$27
+	BCS	CxCA
+	LDA	$738,X
+	SBC	$4B8,X
+	CMP	#$F8
+	BCC	CxF0
+	ADC	#$27
+	.byte	$AC		; LDY abs (bypass LDA #0)
+CxF0:
+	LDA	#0
+	STA	MON_CH
+CxF4:
+	CLV
+CxF5:
+	PLA
+	TAY
+CxE7:
+	PLA
+	TAX
+	PLA
+	BVC	CxFF
+	JMP	MON_COUT1
+CxFF:
+	RTS
+
+; -------------------------------------------------------------
+; Acessing $CxC0 the ROM is mapped to $C080 or $CxC0
+
+	.org	$C180
+
+Cx80:
+	LDA	#$80
+	AND	$6B8,X
+Cx85:
+	SEC
+	BCS	Cx73
+Cx88:
+	STA	$C088,Y
+	BVS	CxCC+1
+:
+	BVS	:-		; ???
+	STA	$C088,Y
+	BVS	CxD4
+:
+	BVS	:-		; ???
+Cx96:
+	BCC	Cx37
+	TAY
+	LDA	$6B8,X
+	LSR	A
+	BCS	Cx4F
+	TYA
+	EOR	#$8D
+	ASL	A
+	BEQ	CxD6
+	LDA	$638,X
+	ASL	A
+	BMI	CxDA
+	TYA
+	EOR	$638,X
+	ASL	A
+	BNE	CxDA
+	INC	$6B8,X
+	CLV
+	BVC	CxC4
+CxB8:
+	LDY	#$A
+CxBA:
+	ADC	$538,X
+	DEY
+	BNE	CxBA
