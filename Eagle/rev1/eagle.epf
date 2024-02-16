@@ -98,10 +98,14 @@ UsedLibrary="D:/Nuvem/Dropbox/Eletronica/eagle_lbr/8bits/AppleII.lbr"
 UsedLibrary="D:/Nuvem/Dropbox/Eletronica/eagle_lbr/Fabio/logos_fabio.lbr"
 
 [Win_1]
+Type="Control Panel"
+Number=0
+
+[Win_2]
 Type="Schematic Editor"
 Number=1
 File="MA163.sch"
-View="-5.83018 -4.13096 270.923 184.263"
+View="10.6598 -4.85554 170.818 104.169"
 WireWidths=" 0.0762 0.1016 0.127 0.15 0.2 0.2032 0.254 0.3048 0.4064 0.508 0.6096 0.8128 1.016 1.27 2.54 0.1524"
 PadDiameters=" 0.254 0.3048 0.4064 0.6096 0.8128 1.016 1.27 1.4224 1.6764 1.778 1.9304 2.1844 2.54 3.81 6.4516 0"
 PadDrills=" 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.65 0.7 0.75 0.8 0.85 0.9 1 0.6"
@@ -140,10 +144,10 @@ ArcDirection=0
 AddLevel=2
 PadsSameType=0
 Layer=97
-Views=" 1: -5.8251 -4.13096 270.664 184.263 2: -5.84542 -4.13096 271.7 184.263 3: -5.83018 -4.13096 270.923 184.263"
+Views=" 1: -5.8251 -4.13096 270.664 184.263 2: -5.84542 -4.13096 271.7 184.263 3: 10.6598 -4.85554 170.818 104.169"
 Sheet="3"
 
-[Win_2]
+[Win_3]
 Type="Board Editor"
 Number=2
 File="MA163.brd"
@@ -186,10 +190,6 @@ ArcDirection=0
 AddLevel=2
 PadsSameType=0
 Layer=1
-
-[Win_3]
-Type="Control Panel"
-Number=0
 
 [Desktop]
 Screen="5760 1080"
