@@ -9700,7 +9700,7 @@ DIN A4, landscape with extra doc field</description>
 <part name="IC12" library="74xx-eu" deviceset="74*374" device="N" technology="LS"/>
 <part name="IC13" library="DRAM" deviceset="4416" device=""/>
 <part name="IC14" library="DRAM" deviceset="4416" device=""/>
-<part name="APPLEIIBUS1" library="AppleII" deviceset="APPLEIIBUS" device="2X4"/>
+<part name="APPLEIIBUS1" library="AppleII" deviceset="APPLEIIBUS" device="2X4" value=""/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" deviceset="VCC" device=""/>
 <part name="C1" library="rcl" deviceset="C-EU" device="050-025X075" value="100n"/>
@@ -9745,7 +9745,7 @@ DIN A4, landscape with extra doc field</description>
 <part name="P+10" library="supply1" deviceset="VCC" device=""/>
 <part name="P+11" library="supply1" deviceset="VCC" device=""/>
 <part name="P+12" library="supply1" deviceset="VCC" device=""/>
-<part name="JMP1" library="jump-0r-smd" library_urn="urn:adsk.eagle:library:251" deviceset="0R-JUMP" device="B" package3d_urn="urn:adsk.eagle:package:15387/1"/>
+<part name="JMP1" library="jump-0r-smd" library_urn="urn:adsk.eagle:library:251" deviceset="0R-JUMP" device="B" package3d_urn="urn:adsk.eagle:package:15387/1" value=""/>
 <part name="FRAME4" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="DINA4_L" device=""/>
 <part name="C2" library="rcl" deviceset="C-EU" device="050-025X075" value="100n"/>
 <part name="C3" library="rcl" deviceset="C-EU" device="050-025X075" value="100n"/>
@@ -9759,7 +9759,7 @@ DIN A4, landscape with extra doc field</description>
 <part name="C11" library="rcl" deviceset="C-EU" device="050-025X075" value="100n"/>
 <part name="P+13" library="supply1" deviceset="VCC" device=""/>
 <part name="GND12" library="supply1" deviceset="GND" device=""/>
-<part name="RN1" library="resistor-net" library_urn="urn:adsk.eagle:library:343" deviceset="RN10" device="" package3d_urn="urn:adsk.eagle:package:24979/1"/>
+<part name="RN1" library="resistor-net" library_urn="urn:adsk.eagle:library:343" deviceset="RN10" device="" package3d_urn="urn:adsk.eagle:package:24979/1" value="3K3x10"/>
 <part name="P+14" library="supply1" deviceset="VCC" device=""/>
 </parts>
 <sheets>
@@ -11430,7 +11430,7 @@ se A6=1 sai 0
 </instance>
 <instance part="RN1" gate="1" x="71.12" y="22.86" smashed="yes" rot="R180">
 <attribute name="NAME" x="73.66" y="20.574" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="73.66" y="26.924" size="1.778" layer="96" rot="R180"/>
+<attribute name="VALUE" x="60.96" y="21.844" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="P+14" gate="VCC" x="81.28" y="22.86" smashed="yes" rot="R270">
 <attribute name="VALUE" x="78.74" y="25.4" size="1.778" layer="96"/>
