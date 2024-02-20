@@ -14,7 +14,7 @@ Dentro da pasta [`Rev1`](Rev1) há três subpastas com os nomes `Docs`, `Eagle` 
 
 # Montagem
 
-A lista de material pode ser encontrada [aqui](Rev1/Docs/Lista%20material.md). Para facilitar a montagem abra o arquivo <a href="Rev1/Docs/ibom.html" target="_blank">ibom.html</a> localmente para visualizar os componentes e seus lugares na placa. Criado com o projeto [InteractiveHtmlBom](https://github.com/openscopeproject/InteractiveHtmlBom), linha de comando: `generate_interactive_bom --highlight-pin1 all --blacklist-empty-val MA163.brd`
+A lista de material pode ser encontrada [aqui](Rev1/Docs/Lista%20material.md). Para facilitar a montagem abra o arquivo [ibom.html](Rev1/Docs/ibom.html) localmente para visualizar os componentes e seus lugares na placa. Criado com o projeto [InteractiveHtmlBom](https://github.com/openscopeproject/InteractiveHtmlBom), linha de comando: `generate_interactive_bom --highlight-pin1 all --blacklist-empty-val MA163.brd`
 
 Soquetes para os CIs não estão na lista de material mas são altamente recomendados para facilitar futuras manutenções.
 
