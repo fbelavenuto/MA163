@@ -1,8 +1,7 @@
 
-
 RESET:					; DATA XREF: ROM:009Dw	ROM:00F7w ...
 		ei			; Enable INT why?
-		ld	a, 80h ; '�'
+		ld	a, 80h ; 'Ç'
 		cp	d		; D = $80 (DE pointed to RAM)?
 		jr	z, loc_A	; Yes, warm reset
 		exx
@@ -22,7 +21,7 @@ loc_E:					; CODE XREF: ROM:0345j
 		ld	b, a
 		res	1, c		; Clear	flag ISASCII
 		res	4, c		; Clear	flag NOACCENT
-		ld	a, 0A5h	; '�'
+		ld	a, 0A5h	; 'Ñ'
 		cp	d
 		cpl
 		jr	nz, loc_28
@@ -185,7 +184,7 @@ loc_F5:					; CODE XREF: ROM:008Ej
 		ld	(4000h), a	; Pulse	LPT_STROBE
 		inc	hl
 		ld	a, h
-		xor	0C0h ; '�'      ; We arrived at $C000 RAM address?
+		xor	0C0h ; '└'      ; We arrived at $C000 RAM address?
 		or	a
 		jp	nz, PutInBuffer2 ; Nop,	jump
 		ld	hl, 8000h	; Yes, reset RAM address
@@ -193,7 +192,7 @@ loc_F5:					; CODE XREF: ROM:008Ej
 ; ---------------------------------------------------------------------------
 
 loc_10B:				; CODE XREF: ROM:00DCj
-		xor	0C0h ; '�'      ; IY arrived at $C000?
+		xor	0C0h ; '└'      ; IY arrived at $C000?
 		jr	nz, loc_113	; No, jump
 		ld	iy, 8000h	; Reset	RAM address
 
@@ -226,7 +225,7 @@ loc_132:				; CODE XREF: ROM:013Aj	ROM:013Dj
 		djnz	loc_132
 		dec	c
 		jr	nz, loc_132
-		ld	c, 0BEh	; '�'   ; NASC(">")
+		ld	c, 0BEh	; '¥'   ; NASC(">")
 		exx
 		res	5, b		; Clear	flag UPPERCASE
 		bit	3, b		; We have RAM?
@@ -277,7 +276,7 @@ loc_175:				; CODE XREF: ROM:017Dj	ROM:0180j
 		djnz	loc_175
 		dec	c
 		jr	nz, loc_175
-		ld	c, 0BCh	; '�'   ; NASC("<")
+		ld	c, 0BCh	; '╝'   ; NASC("<")
 		exx
 		res	4, c		; Clear	flag NOACCENT
 		bit	3, b		; We have RAM?
@@ -356,7 +355,7 @@ loc_1E4:				; CODE XREF: ROM:01AEj
 		ld	(4000h), a	; Pulse	LPT_STROBE
 		inc	hl
 		ld	a, h
-		xor	0C0h ; '�'      ; HL arrived $C000?
+		xor	0C0h ; '└'      ; HL arrived $C000?
 		or	a
 		jp	nz, loc_1D0	; No, jump
 		ld	hl, 8000h	; Yes, reset address
@@ -397,29 +396,29 @@ loc_20A:				; CODE XREF: ROM:0A21j
 
 MODE_mode:				; CODE XREF: ROM:loc_69j ROM:0220j
 		and	7Fh ; ''       ; Clear bit 7
-		cp	40h ; '@'       ; �
+		cp	40h ; '@'       ; á
 		jp	z, loc_83C
-		cp	60h ; '`'       ; �
+		cp	60h ; '`'       ; é
 		jp	z, loc_884
-		cp	7Bh ; '{'       ; �
+		cp	7Bh ; '{'       ; í
 		jp	z, loc_8A2
-		cp	7Eh ; '~'       ; �
+		cp	7Eh ; '~'       ; ó
 		jp	z, loc_8C0
-		cp	7Ch ; '|'       ; �
+		cp	7Ch ; '|'       ; ú
 		jp	z, loc_8DE
-		cp	5Fh ; '_'       ; �
+		cp	5Fh ; '_'       ; à
 		jp	z, loc_7F9
-		cp	5Bh ; '['       ; �
+		cp	5Bh ; '['       ; ã
 		jp	z, loc_7DB
-		cp	23h ; '#'       ; �
+		cp	23h ; '#'       ; õ
 		jp	z, loc_798
-		cp	5Ch ; '\'       ; �
+		cp	5Ch ; '\'       ; â
 		jp	z, loc_77A
-		cp	26h ; '&'       ; �
+		cp	26h ; '&'       ; ê
 		jp	z, loc_75C
-		cp	7Dh ; '}'       ; �
+		cp	7Dh ; '}'       ; ô
 		jp	z, loc_719
-		cp	5Dh ; ']'       ; �
+		cp	5Dh ; ']'       ; ç
 		jp	z, loc_4B3
 		cp	3Fh ; '?'       ; ?
 		jp	z, loc_9C2
@@ -434,7 +433,7 @@ MODE_mode:				; CODE XREF: ROM:loc_69j ROM:0220j
 		bit	4, c		; Check	flag NOACCENT
 		jr	z, loc_2A4	; No flag, jump
 		res	4, c		; Clear	flag NOACCENT
-		ld	l, 0BCh	; '�'   ; NASC("<")
+		ld	l, 0BCh	; '╝'   ; NASC("<")
 		bit	3, b		; We have RAM?
 		jp	nz, loc_18F	; Yes, jump
 
@@ -443,7 +442,7 @@ loc_28B:				; CODE XREF: ROM:0290j
 		in	a, (0)		; Read flags
 		bit	6, a		; Bit 6	= 1 => Busy
 		jr	z, loc_28B
-		ld	a, 0BCh	; '�'   ; NASC("<")
+		ld	a, 0BCh	; '╝'   ; NASC("<")
 		bit	2, c		; Force	clean BIT7?
 		jr	nz, loc_29C	; Yes, jump
 		bit	0, c		; BIT7 enabled?
@@ -460,7 +459,7 @@ loc_2A4:				; CODE XREF: ROM:0280j	ROM:0684j ...
 		bit	5, b		; Is UPPERCASE?
 		jr	z, loc_2CA	; No, jump
 		res	5, b		; Clear	flag Uppercase
-		ld	l, 0BEh	; '�'   ; NASC(">")
+		ld	l, 0BEh	; '¥'   ; NASC(">")
 		bit	3, b		; We have RAM?
 		jp	nz, loc_18F	; Yes, jump
 
@@ -469,7 +468,7 @@ loc_2B1:				; CODE XREF: ROM:02B6j
 		in	a, (0)		; Read flags
 		bit	6, a		; Bit 6	= 1 => Busy
 		jr	z, loc_2B1
-		ld	a, 0BEh	; '�'   ; NASC(">")
+		ld	a, 0BEh	; '¥'   ; NASC(">")
 		bit	2, c		; Force	clean BIT7?
 		jr	nz, loc_2C2	; Yes, jump
 		bit	0, c		; BIT7 enabled?
@@ -563,7 +562,7 @@ loc_341:				; CODE XREF: ROM:083Ej
 
 loc_342:				; CODE XREF: ROM:0327j	ROM:0A47j
 		exx
-		ld	a, 80h ; '�'    ; Reset buffer
+		ld	a, 80h ; 'Ç'    ; Reset buffer
 		jp	loc_E
 ; ---------------------------------------------------------------------------
 
@@ -702,7 +701,7 @@ loc_3F0:				; CODE XREF: ROM:03ABj
 		ld	(4000h), a	; Pulse	LPT_STROBE
 		inc	hl
 		ld	a, h
-		xor	0C0h ; '�'
+		xor	0C0h ; '└'
 		or	a
 		jr	nz, loc_3D9
 		ld	hl, 8000h
@@ -717,7 +716,7 @@ SetCRFlag:				; CODE XREF: ROM:02DBj
 		jp	z, loc_2E6	; No, jump
 		bit	3, b		; We have RAM?
 		jr	nz, loc_436	; Yes, jump
-		ld	a, 8Dh ; '�'    ; Produces an adicional CR
+		ld	a, 8Dh ; 'ì'    ; Produces an adicional CR
 		bit	2, c		; Force	clean BIT7?
 		jr	nz, loc_41F	; Yes, jump
 		bit	0, c		; BIT7 enabled?
@@ -738,7 +737,7 @@ loc_423:				; CODE XREF: ROM:0428j
 		ld	a, c
 		ld	(RESET), a	; Latch	LPT data
 		ld	a, (4000h)	; Pulse	LPT_STROBE
-		ld	a, 8Ah ; '�'
+		ld	a, 8Ah ; 'è'
 		jp	loc_14B
 ; ---------------------------------------------------------------------------
 
@@ -792,7 +791,7 @@ loc_478:				; CODE XREF: ROM:046Dj	ROM:04AAj ...
 		exx
 
 loc_47B:				; CODE XREF: ROM:0438j
-		ld	a, 8Dh ; '�'    ; NASC(CR)
+		ld	a, 8Dh ; 'ì'    ; NASC(CR)
 		bit	1, b		; Is second page of RAM?
 		ld	(6000h), a	; Clear	FF_HIGH32K
 		jr	z, loc_487	; No, jump
@@ -822,7 +821,7 @@ loc_49D:				; CODE XREF: ROM:0455j
 		ld	(4000h), a	; Pulse	LPT_STROBE
 		inc	hl
 		ld	a, h
-		xor	0C0h ; '�'      ; RAM address arrived to C000?
+		xor	0C0h ; '└'      ; RAM address arrived to C000?
 		or	a
 		jp	nz, loc_478	; No, jump
 		ld	hl, 8000h	; Reset	Buffer Address
@@ -843,9 +842,9 @@ loc_4BD:				; CODE XREF: ROM:04B6j
 		bit	5, b		; Is UPPERCASE?
 		res	5, b		; Clear	UPPERCASE flag
 		exx
-		ld	c, 0E3h	; '�'
+		ld	c, 0E3h	; 'Ò'
 		jp	z, loc_4CE	; No, jump
-		ld	c, 0C3h	; '�'
+		ld	c, 0C3h	; '├'
 
 loc_4CE:				; CODE XREF: ROM:04C9j
 		bit	3, a
@@ -869,9 +868,9 @@ loc_4DE:				; CODE XREF: ROM:04D9j	ROM:04E3j
 		ld	a, c
 		ld	(RESET), a	; Latch	LPT data
 		ld	a, (4000h)	; Pulse	LPT_STROBE
-		ld	c, 88h ; '�'    ; NASC(BACKSPACE)
+		ld	c, 88h ; 'ê'    ; NASC(BACKSPACE)
 		djnz	loc_4D4
-		ld	a, 0ACh	; '�'   ; NASC(",")?
+		ld	a, 0ACh	; '¼'   ; NASC(",")?
 		jp	loc_14B
 ; ---------------------------------------------------------------------------
 
@@ -1148,27 +1147,27 @@ loc_687:				; CODE XREF: ROM:064Bj
 ; ---------------------------------------------------------------------------
 
 loc_68E:				; CODE XREF: ROM:064Fj	ROM:0653j ...
-		ld	a, 0A7h	; '�'
+		ld	a, 0A7h	; 'º'
 		jp	loc_C7
 ; ---------------------------------------------------------------------------
 
 loc_693:				; CODE XREF: ROM:0663j
-		ld	a, 0E0h	; '�'
+		ld	a, 0E0h	; 'Ó'
 		jp	loc_C7
 ; ---------------------------------------------------------------------------
 
 loc_698:				; CODE XREF: ROM:0667j	ROM:066Bj
-		ld	a, 0FEh	; '�'
+		ld	a, 0FEh	; '■'
 		jp	loc_C7
 ; ---------------------------------------------------------------------------
 
 loc_69D:				; CODE XREF: ROM:066Fj	ROM:0673j ...
-		ld	a, 0DEh	; '�'
+		ld	a, 0DEh	; 'Ì'
 		jp	loc_C7
 ; ---------------------------------------------------------------------------
 
 loc_6A2:				; CODE XREF: ROM:0643j
-		ld	a, 8Ah ; '�'
+		ld	a, 8Ah ; 'è'
 		jp	loc_BD
 ; ---------------------------------------------------------------------------
 
@@ -1179,7 +1178,7 @@ loc_6A7:				; CODE XREF: ROM:0514j
 		ld	(4000h), a	; Pulse	LPT_STROBE
 		inc	hl
 		ld	a, h
-		xor	0C0h ; '�'
+		xor	0C0h ; '└'
 		or	a
 		jp	nz, loc_537
 		ld	hl, 8000h
@@ -1187,7 +1186,7 @@ loc_6A7:				; CODE XREF: ROM:0514j
 ; ---------------------------------------------------------------------------
 
 loc_6BD:				; CODE XREF: ROM:055Aj
-		xor	0C0h ; '�'
+		xor	0C0h ; '└'
 		or	a
 		jp	nz, loc_568
 		ld	iy, 8000h
@@ -1195,7 +1194,7 @@ loc_6BD:				; CODE XREF: ROM:055Aj
 ; ---------------------------------------------------------------------------
 
 loc_6CA:				; CODE XREF: ROM:05D3j
-		xor	0C0h ; '�'
+		xor	0C0h ; '└'
 		or	a
 		jp	nz, loc_5E1
 		ld	iy, 8000h
@@ -1216,7 +1215,7 @@ loc_6E2:				; CODE XREF: ROM:0599j
 		ld	(4000h), a	; Pulse	LPT_STROBE
 		inc	hl
 		ld	a, h
-		xor	0C0h ; '�'
+		xor	0C0h ; '└'
 		or	a
 		jp	nz, loc_5BC
 		ld	hl, 8000h
@@ -1237,7 +1236,7 @@ loc_703:				; CODE XREF: ROM:0610j
 		ld	(4000h), a	; Pulse	LPT_STROBE
 		inc	hl
 		ld	a, h
-		xor	0C0h ; '�'
+		xor	0C0h ; '└'
 		or	a
 		jp	nz, loc_633
 		ld	hl, 8000h
@@ -1258,9 +1257,9 @@ loc_723:				; CODE XREF: ROM:071Cj
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0EFh	; '�'
+		ld	c, 0EFh	; '´'
 		jp	z, loc_734	; No UPPERCASE,	jump
-		ld	c, 0CFh	; '�'
+		ld	c, 0CFh	; '¤'
 
 loc_734:				; CODE XREF: ROM:072Fj	ROM:0772j ...
 		bit	3, a
@@ -1284,9 +1283,9 @@ loc_745:				; CODE XREF: ROM:0740j	ROM:074Aj
 		ld	a, c
 		ld	(RESET), a	; Latch	LPT data
 		ld	a, (4000h)	; Pulse	LPT_STROBE
-		ld	c, 88h ; '�'
+		ld	c, 88h ; 'ê'
 		djnz	loc_73B
-		ld	a, 0DEh	; '�'
+		ld	a, 0DEh	; 'Ì'
 		jp	loc_14B
 ; ---------------------------------------------------------------------------
 
@@ -1304,9 +1303,9 @@ loc_766:				; CODE XREF: ROM:075Fj
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0E5h	; '�'
+		ld	c, 0E5h	; 'Õ'
 		jp	z, loc_734	; No UPPERCASE,	jump
-		ld	c, 0C5h	; '�'
+		ld	c, 0C5h	; '┼'
 		jp	loc_734
 ; ---------------------------------------------------------------------------
 
@@ -1324,9 +1323,9 @@ loc_784:				; CODE XREF: ROM:077Dj
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0E1h	; '�'
+		ld	c, 0E1h	; 'ß'
 		jp	z, loc_734	; No UPPERCASE,	jump
-		ld	c, 0C1h	; '�'
+		ld	c, 0C1h	; '┴'
 		jp	loc_734
 ; ---------------------------------------------------------------------------
 
@@ -1344,9 +1343,9 @@ loc_7A2:				; CODE XREF: ROM:079Bj
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0EFh	; '�'
+		ld	c, 0EFh	; '´'
 		jp	z, loc_7B3	; No UPPERCASE,	jump
-		ld	c, 0CFh	; '�'
+		ld	c, 0CFh	; '¤'
 
 loc_7B3:				; CODE XREF: ROM:07AEj	ROM:07F1j ...
 		bit	3, a
@@ -1370,9 +1369,9 @@ loc_7C4:				; CODE XREF: ROM:07BFj	ROM:07C9j
 		ld	a, c
 		ld	(RESET), a	; Latch	LPT data
 		ld	a, (4000h)	; Pulse	LPT_STROBE
-		ld	c, 88h ; '�'
+		ld	c, 88h ; 'ê'
 		djnz	loc_7BA
-		ld	a, 0FEh	; '�'
+		ld	a, 0FEh	; '■'
 		jp	loc_14B
 ; ---------------------------------------------------------------------------
 
@@ -1390,9 +1389,9 @@ loc_7E5:				; CODE XREF: ROM:07DEj
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0E1h	; '�'
+		ld	c, 0E1h	; 'ß'
 		jp	z, loc_7B3	; No UPPERCASE,	jump
-		ld	c, 0C1h	; '�'
+		ld	c, 0C1h	; '┴'
 		jp	loc_7B3
 ; ---------------------------------------------------------------------------
 
@@ -1410,9 +1409,9 @@ loc_803:				; CODE XREF: ROM:07FCj
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0E1h	; '�'
+		ld	c, 0E1h	; 'ß'
 		jp	z, loc_814	; No UPPERCASE,	jump
-		ld	c, 0C1h	; '�'
+		ld	c, 0C1h	; '┴'
 
 loc_814:				; CODE XREF: ROM:080Fj
 		bit	3, a
@@ -1436,9 +1435,9 @@ loc_825:				; CODE XREF: ROM:0820j	ROM:082Aj
 		ld	a, c
 		ld	(RESET), a	; Latch	LPT data
 		ld	a, (4000h)	; Pulse	LPT_STROBE
-		ld	c, 88h ; '�'
+		ld	c, 88h ; 'ê'
 		djnz	loc_81B
-		ld	a, 0E0h	; '�'
+		ld	a, 0E0h	; 'Ó'
 		jp	loc_14B
 ; ---------------------------------------------------------------------------
 
@@ -1458,9 +1457,9 @@ loc_84B:				; CODE XREF: ROM:0844j
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0E1h	; '�'   ; NASC('a')
+		ld	c, 0E1h	; 'ß'   ; NASC('a')
 		jp	z, loc_85C	; No UPPERCASE,	jump
-		ld	c, 0C1h	; '�'   ; NASC('A')
+		ld	c, 0C1h	; '┴'   ; NASC('A')
 
 loc_85C:				; CODE XREF: ROM:0857j	ROM:089Aj ...
 		bit	3, a
@@ -1484,9 +1483,9 @@ loc_86D:				; CODE XREF: ROM:0868j	ROM:0872j
 		ld	a, c
 		ld	(RESET), a	; Latch	LPT data
 		ld	a, (4000h)	; Pulse	LPT_STROBE
-		ld	c, 88h ; '�'    ; NASC(BS)
+		ld	c, 88h ; 'ê'    ; NASC(BS)
 		djnz	loc_863
-		ld	a, 0A7h	; '�'   ; NASC("'")
+		ld	a, 0A7h	; 'º'   ; NASC("'")
 		jp	loc_14B
 ; ---------------------------------------------------------------------------
 
@@ -1504,9 +1503,9 @@ loc_88E:				; CODE XREF: ROM:0887j
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0E5h	; '�'   ; NASC('e')
+		ld	c, 0E5h	; 'Õ'   ; NASC('e')
 		jp	z, loc_85C	; No UPPERCASE,	jump
-		ld	c, 0C5h	; '�'   ; NASC('E')
+		ld	c, 0C5h	; '┼'   ; NASC('E')
 		jp	loc_85C
 ; ---------------------------------------------------------------------------
 
@@ -1524,9 +1523,9 @@ loc_8AC:				; CODE XREF: ROM:08A5j
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0E9h	; '�'   ; NASC('i')
+		ld	c, 0E9h	; 'Ú'   ; NASC('i')
 		jp	z, loc_85C	; No UPPERCASE,	jump
-		ld	c, 0C9h	; '�'   ; NASC('I')
+		ld	c, 0C9h	; '╔'   ; NASC('I')
 		jp	loc_85C
 ; ---------------------------------------------------------------------------
 
@@ -1544,9 +1543,9 @@ loc_8CA:				; CODE XREF: ROM:08C3j
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0EFh	; '�'   ; NASC('o')
+		ld	c, 0EFh	; '´'   ; NASC('o')
 		jp	z, loc_85C	; No UPPERCASE,	jump
-		ld	c, 0CFh	; '�'   ; NASC('O')
+		ld	c, 0CFh	; '¤'   ; NASC('O')
 		jp	loc_85C
 ; ---------------------------------------------------------------------------
 
@@ -1564,9 +1563,9 @@ loc_8E8:				; CODE XREF: ROM:08E1j
 		bit	5, a		; UPPERCASE flag enabled? (B is	copied to A)
 		res	5, b		; Reset	UPPERCASE flag
 		exx
-		ld	c, 0F5h	; '�'   ; NASC('u')
+		ld	c, 0F5h	; '§'   ; NASC('u')
 		jp	z, loc_85C	; No UPPERCASE,	jump
-		ld	c, 0D5h	; '�'   ; NASC('U')
+		ld	c, 0D5h	; 'ı'   ; NASC('U')
 		jp	loc_85C
 ; ---------------------------------------------------------------------------
 
@@ -1575,9 +1574,9 @@ loc_8FC:				; CODE XREF: ROM:04BFj
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0C6h	; '�'   ; ABICOMP: �
+		ld	c, 0C6h	; 'ã'   ; ABICOMP: ç
 		jr	z, loc_908	; No Uppercase,	jump
-		ld	c, 0A6h	; '�'   ; ABICOMP: �
+		ld	c, 0A6h	; 'ª'   ; ABICOMP: Ç
 
 loc_908:				; CODE XREF: ROM:0904j	ROM:091Aj ...
 		exx
@@ -1592,9 +1591,9 @@ loc_912:				; CODE XREF: ROM:0725j
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0D2h	; '�'   ; ABICOMP: �
+		ld	c, 0D2h	; 'Ê'   ; ABICOMP: ô
 		jp	z, loc_908	; No, jump
-		ld	c, 0B2h	; '�'   ; ABICOMP: �
+		ld	c, 0B2h	; '▓'   ; ABICOMP: Ô
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1603,9 +1602,9 @@ loc_922:				; CODE XREF: ROM:0768j
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0C9h	; '�'   ; ABICOMP: �
+		ld	c, 0C9h	; '╔'   ; ABICOMP: ê
 		jp	z, loc_908	; No, jump
-		ld	c, 0A9h	; '�'   ; ABICOMP: �
+		ld	c, 0A9h	; '®'   ; ABICOMP: Ê
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1614,9 +1613,9 @@ loc_932:				; CODE XREF: ROM:0786j
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0C3h	; '�'   ; ABICOMP: �
+		ld	c, 0C3h	; '├'   ; ABICOMP: â
 		jp	z, loc_908	; No, jump
-		ld	c, 0A3h	; '�'   ; ABICOMP: �
+		ld	c, 0A3h	; 'ú'   ; ABICOMP: Â
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1625,9 +1624,9 @@ loc_942:				; CODE XREF: ROM:07A4j
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0D3h	; '�'   ; ABICOMP: �
+		ld	c, 0D3h	; 'Ë'   ; ABICOMP: õ
 		jp	z, loc_908	; No, jump
-		ld	c, 0B3h	; '�'   ; ABICOMP: �
+		ld	c, 0B3h	; '│'   ; ABICOMP: Õ
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1636,9 +1635,9 @@ loc_952:				; CODE XREF: ROM:07E7j
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0C4h	; '�'   ; ABICOMP: �
+		ld	c, 0C4h	; '─'   ; ABICOMP: ã
 		jp	z, loc_908	; No, jump
-		ld	c, 0A4h	; '�'   ; ABICOMP: �
+		ld	c, 0A4h	; 'ñ'   ; ABICOMP: Ã
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1647,9 +1646,9 @@ loc_962:				; CODE XREF: ROM:0805j
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0C1h	; '�'   ; ABICOMP: �
+		ld	c, 0C1h	; '┴'   ; ABICOMP: à
 		jp	z, loc_908	; No
-		ld	c, 0A1h	; '�'   ; ABICOMP: �
+		ld	c, 0A1h	; 'í'   ; ABICOMP: À
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1658,9 +1657,9 @@ loc_972:				; CODE XREF: ROM:084Dj
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0C2h	; '�'   ; ABICOMP: �
+		ld	c, 0C2h	; '┬'   ; ABICOMP: á
 		jp	z, loc_908	; No
-		ld	c, 0A2h	; '�'   ; ABICOMP: �
+		ld	c, 0A2h	; 'ó'   ; ABICOMP: Á
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1669,9 +1668,9 @@ loc_982:				; CODE XREF: ROM:0890j
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0C8h	; '�'   ; ABICOMP: �
+		ld	c, 0C8h	; '╚'   ; ABICOMP: é
 		jp	z, loc_908	; No, jump
-		ld	c, 0A8h	; '�'   ; ABICOMP: �
+		ld	c, 0A8h	; '¿'   ; ABICOMP: É
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1680,9 +1679,9 @@ loc_992:				; CODE XREF: ROM:08AEj
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0CCh	; '�'   ; ABICOMP: �
+		ld	c, 0CCh	; '╠'   ; ABICOMP: í
 		jp	z, loc_908	; No
-		ld	c, 0ACh	; '�'   ; ABICOMP: �
+		ld	c, 0ACh	; '¼'   ; ABICOMP: Í
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1691,9 +1690,9 @@ loc_9A2:				; CODE XREF: ROM:08CCj
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0D1h	; '�'   ; ABICOMP: �
+		ld	c, 0D1h	; 'Ð'   ; ABICOMP: ó
 		jp	z, loc_908	; No, jump
-		ld	c, 0B1h	; '�'   ; ABICOMP: �
+		ld	c, 0B1h	; '▒'   ; ABICOMP: Ó
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1702,9 +1701,9 @@ loc_9B2:				; CODE XREF: ROM:08EAj
 		res	5, b		; Reset	UPPERCASE flag
 		ld	a, b
 		exx
-		ld	c, 0D7h	; '�'   ; ABICOMP: �
+		ld	c, 0D7h	; 'Î'   ; ABICOMP: ú
 		jp	z, loc_908	; No, jump
-		ld	c, 0B7h	; '�'   ; ABICOMP: �
+		ld	c, 0B7h	; 'À'   ; ABICOMP: Ú
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1715,7 +1714,7 @@ loc_9C2:				; CODE XREF: ROM:0267j
 		set	2, c		; Force	clean BIT7
 		ld	a, b
 		exx
-		ld	c, 0BEh	; '�'   ; ABICOMP: �
+		ld	c, 0BEh	; '¥'   ; ABICOMP: §
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1726,7 +1725,7 @@ loc_9D2:				; CODE XREF: ROM:026Cj
 		set	2, c		; Force	clean BIT7
 		ld	a, b
 		exx
-		ld	c, 0DDh	; '�'   ; ABICOMP: �
+		ld	c, 0DDh	; '¦'   ; ABICOMP: º
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1737,7 +1736,7 @@ loc_9E2:				; CODE XREF: ROM:0271j
 		set	2, c		; Force	clean BIT7
 		ld	a, b
 		exx
-		ld	c, 0DCh	; '�'   ; ABICOMP: �
+		ld	c, 0DCh	; '▄'   ; ABICOMP: ª
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1748,7 +1747,7 @@ loc_9F2:				; CODE XREF: ROM:0276j
 		set	2, c		; Force	clean BIT7
 		ld	a, b
 		exx
-		ld	c, 0D9h	; '�'   ; ABICOMP: �
+		ld	c, 0D9h	; '┘'   ; ABICOMP: ü
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1759,7 +1758,7 @@ loc_A02:				; CODE XREF: ROM:027Bj
 		set	2, c		; Force	clean BIT7
 		ld	a, b
 		exx
-		ld	c, 0B9h	; '�'   ; ABICOMP: �
+		ld	c, 0B9h	; '╣'   ; ABICOMP: Ü
 		jp	loc_908
 ; ---------------------------------------------------------------------------
 
@@ -1772,7 +1771,7 @@ loc_A12:				; CODE XREF: ROM:ReadA2Dataj
 		exx
 		ld	l, a		; Copy MODE key	state on bit 6 of L
 		ld	a, c
-		and	0BFh ; '�'      ; Clear bit 6 of C
+		and	0BFh ; '┐'      ; Clear bit 6 of C
 		or	l		; Copy MODE key	to bit 6 of C
 		ld	c, a
 		exx
@@ -1790,7 +1789,7 @@ loc_A24:				; CODE XREF: ROM:03A3j
 		sla	a		; Shift	bit 5 to bit 6
 		cp	l		; Compare with last MODE flag?
 		jr	z, loc_A4B
-		ld	l, 80h ; '�'
+		ld	l, 80h ; 'Ç'
 		xor	a
 
 loc_A36:				; CODE XREF: ROM:0A37j	ROM:0A3Aj
@@ -1811,7 +1810,7 @@ loc_A36:				; CODE XREF: ROM:0A37j	ROM:0A3Aj
 loc_A4B:				; CODE XREF: ROM:0A31j
 		ld	l, a
 		ld	a, c
-		and	0BFh ; '�'
+		and	0BFh ; '┐'
 		or	l
 		ld	c, a
 		exx
